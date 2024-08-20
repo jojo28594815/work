@@ -1,0 +1,35 @@
+先建好資料庫把pokemon_info_202408121159.sql資料塞入
+xxx請自行修改
+
+# 設定 OpenAI API 密鑰
+openai.api_key = "xxx"  # 替換為你的 OpenAI API 密鑰
+
+
+# 設定 LINE Bot 的權杖與使用者 ID#替換為你的 LINE Bot密鑰
+auth_token = "xxx"
+YouruserID = "xxx"
+#替換為你的 MySQL 資料庫
+def get_db_connection():
+    return pymysql.connect(
+        host='localhost',
+        user='xxx',
+        password='xxx',
+        database='xxx'
+    )
+只後
+啟動 ngrok http 5000
+
+把類似:https://a371-60-250-246-100.ngrok-free.app
+
+給line bot
+
+然後 用throny 啟動 line_test16.py
+
+line_test16.py啟動後就能在line上使用了
+
+能問'編號最大'的寶可夢
+
+以及用名子查相關敘述
+
+或數字查相關寶可夢名
+以及跟chat gpt聊天

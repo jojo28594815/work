@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>零件管理</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 800px; margin: auto; padding: 20px; }
+        table { width: 100%; border-collapse: collapse; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #ddd; }
+        th { background-color: #f2f2f2; }
+        button { padding: 5px 10px; cursor: pointer; }
+        .alert { padding: 15px; margin: 15px 0; border-radius: 4px; }
+        .alert-success { background-color: #d4edda; color: #155724; }
+        .alert-warning { background-color: #fff3cd; color: #856404; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>零件管理</h1>
+
+        <!-- 顯示消息 -->
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                {% for category, message in messages %}
+                    <div class="alert alert-{{ category }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <form action="{{ url_for('add_part') }}" method="post">
+            <div class="form-group">
+                <label for="name">零件名稱:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="quantity">數量:</label>
+                <input type="number" id="quantity" name="quantity" required>
+            </div>
+            <div class="form-group">
+                <label for="price">價格:</label>
+                <input type="text" id="price" name="price" required>
+            </div>
+            <div class="form-group">
+                <label for="supplier_id">供應商:</label>
+                <select id="supplier_id" name="supplier_id" required>
+                    {% for supplier in suppliers %}
+                        <option value="{{ supplier[0] }}">{{ supplier[1] }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit">新增零件</button>
+        </form>
+
+        <br>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>名稱</th>
+                    <th>數量</th>
+                    <th>價格</th>
+                    <th>供應商</th>
+                    <th>操作</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for part in parts %}
+                    <tr>
+                        <td>{{ part[0] }}</td>
+                        <td>{{ part[1] }}</td>
+                        <td>{{ part[2] }}</td>
+                        <td>{{ part[3] }}</td>
+                        <td>{{ part[4] }}</td>
+                        <td>
+                            <a href="{{ url_for('delete_part', id=part[0]) }}" onclick="return confirm('確定刪除嗎？')">刪除</a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <a href="{{ url_for('index') }}">返回首頁</a>
+    </div>
+</body>
+</html>
