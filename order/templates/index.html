@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>RFID 登入紀錄</title>
+</head>
+<body>
+    <h1>RFID 卡片持有者的登入與登出紀錄</h1>
+
+
+    <!-- 按鈕跳轉到其他頁面 -->
+    <br>
+    <button onclick="window.location.href='/add_cardholder'">新增卡片持有者</button>
+    <button onclick="window.location.href='/log_access'">執行登入/登出操作</button>
+        <button onclick="window.location.href='/edit_cardholder'">修改卡片持有者名稱</button>
+
+
+    <!-- 顯示紀錄表格 -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>使用者名稱</th>
+                <th>登入時間</th>
+                <th>登出時間</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in logs %}
+            <tr>
+                <td>{{ log[0] }}</td>
+                <td>{{ log[1] }}</td>
+                <td>{{ log[2] }}</td>
+                <td>{{ log[3] }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

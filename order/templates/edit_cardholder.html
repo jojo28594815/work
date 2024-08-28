@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>修改卡片持有者名稱</title>
+</head>
+<body>
+    <h1>修改卡片持有者名稱</h1>
+
+    <!-- 表單讓使用者選擇卡片並輸入新名稱 -->
+    <form method="POST" action="/edit_cardholder">
+        <label for="card_uid">選擇卡片：</label>
+        <select id="card_uid" name="card_uid" required>
+            {% for cardholder in cardholders %}
+            <option value="{{ cardholder[0] }}">{{ cardholder[1] }} ({{ cardholder[0] }})</option>
+            {% endfor %}
+        </select>
+        <br><br>
+        <label for="new_name">新名稱：</label>
+        <input type="text" id="new_name" name="new_name" required>
+        <br><br>
+        <button type="submit">修改名稱</button>
+    </form>
+
+    <!-- 返回首頁的按鈕 -->
+    <br>
+    <button onclick="window.location.href='/'">返回首頁</button>
+</body>
+</html>
